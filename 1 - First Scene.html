@@ -12,8 +12,15 @@
 </html>
 
 <script>    
-    let scene, camera, renderer;
+    let scene, camera, renderer, cube;
     
+    let createCube = function() {
+        let geometry = new THREE.BoxGeometry(1, 1, 1);
+        let material = new THREE.MeshBasicMaterial({color: 0x00a1cb});
+        cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+    }
+
     // set up the environment - 
     // initiallize scene, camera, objects and renderer
     let init = function() {
@@ -27,7 +34,9 @@
                         window.innerWidth / window.innerHeight, 
                         1, 1000);
         camera.position.z = 5;
-        
+        let axes = new THREE.AxesHelper(3);
+        scene.add(axes);
+        createCube();
         
         // create the renderer   
         renderer = new THREE.WebGLRenderer();   
@@ -40,9 +49,10 @@
     
     // main animation loop - calls 50-60 in a second.
     let mainLoop = function() {
-        // console.log("Hello");
-        renderer.render(scene, camera);
         requestAnimationFrame(mainLoop);
+
+        cube.rotation.y += 0.05;
+        renderer.render(scene, camera);
     };
     
     ///////////////////////////////////////////////
