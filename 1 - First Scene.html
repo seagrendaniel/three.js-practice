@@ -6,6 +6,8 @@
         <script src = "three.min.js"></script>       
     </head>
     <body>
+        <!-- <p> Hello</p> -->
+
     </body> 
 </html>
 
@@ -15,7 +17,7 @@
     // set up the environment - 
     // initiallize scene, camera, objects and renderer
     let init = function() {
-        // create the scene
+        // create the scene 
         scene = new THREE.Scene();
         scene.background = new THREE.Color(0xababab);
         
@@ -38,7 +40,7 @@
     
     // main animation loop - calls 50-60 in a second.
     let mainLoop = function() {
-        console.log("Hello");
+        // console.log("Hello");
         renderer.render(scene, camera);
         requestAnimationFrame(mainLoop);
     };
