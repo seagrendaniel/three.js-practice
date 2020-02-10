@@ -12,7 +12,7 @@
 </html>
 
 <script>    
-    let scene, camera, renderer, cube, sphere;
+    let scene, camera, renderer, cube, sphere, torus;
 
     let createCube = function() {
         let geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -31,6 +31,16 @@
         scene.add(sphere);
     }
 
+    let createTorus = function() {
+        let geometry = new THREE.TorusGeometry(1, 0.5, 20, 20, Math.PI*2);
+        let material = new THREE.MeshBasicMaterial({
+            color: 0x000aac,
+            wireframe: true
+        })
+        torus = new THREE.Mesh(geometry, material);
+        scene.add(torus);
+    }
+
     // set up the environment - 
     // initiallize scene, camera, objects and renderer
     let init = function() {
@@ -47,7 +57,8 @@
         // let axes = new THREE.AxesHelper(3);
         // scene.add(axes);
         // createCube();
-        createSphere();
+        // createSphere();
+        createTorus();
         
         // create the renderer   
         renderer = new THREE.WebGLRenderer();   
@@ -64,8 +75,10 @@
 
         // cube.rotation.y += 0.05;
 
-        sphere.rotation.y += 0.02;
-        sphere.rotation.x += 0.01;
+        // sphere.rotation.y += 0.01;
+        // sphere.rotation.x += 0.01;
+
+        torus.rotation.y += 0.01;
         renderer.render(scene, camera);
     };
     
