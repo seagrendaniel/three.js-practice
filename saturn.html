@@ -25,6 +25,7 @@
 <script>
   let scene, camera, renderer, sphere, disc1, disc2, disc3;
 
+  let rings = [];
   let ADD = 0.05;
   let boundary = 0;
   let createSaturn = function () {
@@ -48,11 +49,20 @@
     });
 
     disc1 = new THREE.Mesh(disc1Geometry, discMaterial1);
+    // scene.add(disc1);
+    rings.push(disc1);
     disc2 = new THREE.Mesh(disc2Geometry, discMaterial2);
+    // scene.add(disc2);
+    rings.push(disc2);
     disc3 = new THREE.Mesh(disc3Geometry, discMaterial3);
-    scene.add(disc1);
-    scene.add(disc2);
-    scene.add(disc3);
+    // scene.add(disc3);
+    rings.push(disc3);
+
+    rings.forEach(ring => {
+      ring.rotation.x = 1.7;
+      ring.rotation.y = 0.5;
+      scene.add(ring);
+    })
   }
 
   let init = function () {
@@ -75,31 +85,10 @@
 
 
   let mainLoop = function () {
-
-    sphere.rotation.y += ADD;
-    disc1.rotation.x += ADD;
-    disc2.rotation.x += ADD;
-    disc3.rotation.x += ADD;
-    sphere.rotation.y += ADD/3;
-    disc1.rotation.y += ADD/3;
-    disc2.rotation.y += ADD/3;
-    disc3.rotation.y += ADD/3;
-
-    // if(boundary < 5 || boundary > -5) {
-    //   sphere.position.y += ADD;
-    //   disc1.position.y += ADD;
-    //   disc2.position.y += ADD;
-    //   disc3.position.y += ADD;
-    //   boundary += ADD;
-    // } else {
-    //   boundary -= ADD;
-    //   sphere.position.y -= ADD;
-    //   disc1.position.y -= ADD;
-    //   disc2.position.y -= ADD;
-    //   disc3.position.y -= ADD;
-    // }
-
-    // console.log(boundary);
+    camera.position.y += ADD;
+    if(camera.position.y >= 6 || camera.position.y <= -6) {
+      ADD *= -1;
+    }
 
     renderer.render(scene, camera);
     requestAnimationFrame(mainLoop);
