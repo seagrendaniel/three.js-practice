@@ -1,68 +1,111 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>Saturn</title>
-		<style>
-			body { margin: 0; }
-			canvas { display: block; }
-		</style>
-	</head>
-	<body>
-		<script src="three.min.js"></script>
-		<script>
-      let scene, camera, renderer, sphere, disc1, disc2, disc3;
 
-      let createSaturn = function(){
-         let sphereGeometry = new THREE.SphereGeometry(2, 40, 40);
-         let sphereMaterial = new THREE.BasicMeshMaterial({
-           color: 'orange'
-         })
-         sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-         scene.add(sphere);
-         let disc1Geometry = new THREE.TorusGeometry(3, 1, 2, 40);
-         let disc2Geometry = new THREE.TorusGeometry(4, 1, 2, 40);
-         let disc3Geometry = new THREE.TorusGeometry(5, 1, 2, 40);
-         let discMaterial1 = new THREE.BasicMeshMaterial({
-           color: 'yellow'
-         });
-         let discMaterial2 = new THREE.BasicMeshMaterial({
-           color: 'red'
-         });
-         let discMaterial3 = new THREE.BasicMeshMaterial({
-           color: 'yellow'
-         });
+<head>
+  <meta charset="utf-8">
+  <script src="three.min.js"></script>
+  <title>Saturn</title>
+  <style>
+    body {
+      margin: 0;
+    }
 
-         disc1 = new THREE.Mesh(disc1Geometry, discMaterial1);
-         disc2 = new THREE.Mesh(disc2Geometry, discMaterial2);
-         disc3 = new THREE.Mesh(disc3Geometry, discMaterial3);
-         scene.add(disc1);
-         scene.add(disc2);
-         scene.add(disc3);
-      }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
 
-      let init = function() {
-        // create scene
-        scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x000000);
+<body>
 
-        // set up camera
-        camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 1000);
-  
-  
-        // create the renderer
-        renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
-      }
+</body>
 
-
-      let mainLoop = function() {
-
-        renderer.render(scene, camera);
-        requestAnimationFrame(mainLoop);
-      }
-
-		</script>
-	</body>
 </html>
+
+<script>
+  let scene, camera, renderer, sphere, disc1, disc2, disc3;
+
+  let ADD = 0.05;
+  let boundary = 0;
+  let createSaturn = function () {
+    let sphereGeometry = new THREE.SphereGeometry(2, 40, 40);
+    let sphereMaterial = new THREE.MeshBasicMaterial({
+      color: 'orange'
+    })
+    sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+    scene.add(sphere);
+    let disc1Geometry = new THREE.TorusGeometry(3, 0.9, 2, 40);
+    let disc2Geometry = new THREE.TorusGeometry(5, 0.9, 2, 40);
+    let disc3Geometry = new THREE.TorusGeometry(7, 0.9, 2, 40);
+    let discMaterial1 = new THREE.MeshBasicMaterial({
+      color: 'yellow'
+    });
+    let discMaterial2 = new THREE.MeshBasicMaterial({
+      color: 'blue'
+    });
+    let discMaterial3 = new THREE.MeshBasicMaterial({
+      color: 'purple'
+    });
+
+    disc1 = new THREE.Mesh(disc1Geometry, discMaterial1);
+    disc2 = new THREE.Mesh(disc2Geometry, discMaterial2);
+    disc3 = new THREE.Mesh(disc3Geometry, discMaterial3);
+    scene.add(disc1);
+    scene.add(disc2);
+    scene.add(disc3);
+  }
+
+  let init = function () {
+    // create scene
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x000000);
+
+    // set up camera
+    camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 1000);
+    camera.position.z = 50;
+
+    createSaturn();
+
+
+    // create the renderer
+    renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+  }
+
+
+  let mainLoop = function () {
+
+    sphere.rotation.y += ADD;
+    disc1.rotation.x += ADD;
+    disc2.rotation.x += ADD;
+    disc3.rotation.x += ADD;
+    sphere.rotation.y += ADD/3;
+    disc1.rotation.y += ADD/3;
+    disc2.rotation.y += ADD/3;
+    disc3.rotation.y += ADD/3;
+
+    // if(boundary < 5 || boundary > -5) {
+    //   sphere.position.y += ADD;
+    //   disc1.position.y += ADD;
+    //   disc2.position.y += ADD;
+    //   disc3.position.y += ADD;
+    //   boundary += ADD;
+    // } else {
+    //   boundary -= ADD;
+    //   sphere.position.y -= ADD;
+    //   disc1.position.y -= ADD;
+    //   disc2.position.y -= ADD;
+    //   disc3.position.y -= ADD;
+    // }
+
+    // console.log(boundary);
+
+    renderer.render(scene, camera);
+    requestAnimationFrame(mainLoop);
+  }
+
+  init();
+  mainLoop();
+
+</script>
