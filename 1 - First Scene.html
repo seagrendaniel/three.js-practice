@@ -24,7 +24,7 @@
     let createSphere = function() {
         let geometry = new THREE.SphereGeometry(1, 30, 30, 0, Math.PI*1.5, 0, Math.PI*1.5);
         let material = new THREE.MeshBasicMaterial({
-            color: 0xfffaaa,
+            color: 0xfffaca,
             wireframe: true
         });
         sphere = new THREE.Mesh(geometry, material);
@@ -64,7 +64,7 @@
 
         // cube.rotation.y += 0.05;
 
-        sphere.rotation.y += 0.01;
+        sphere.rotation.y += 0.02;
         sphere.rotation.x += 0.01;
         renderer.render(scene, camera);
     };
