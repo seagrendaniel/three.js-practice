@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Saturn</title>
+		<style>
+			body { margin: 0; }
+			canvas { display: block; }
+		</style>
+	</head>
+	<body>
+		<script src="three.min.js"></script>
+		<script>
+      let scene, camera, renderer, sphere, disc1, disc2, disc3;
+
+      let createSaturn = function(){
+         let sphereGeometry = new THREE.SphereGeometry(2, 40, 40);
+         let sphereMaterial = new THREE.BasicMeshMaterial({
+           color: 'orange'
+         })
+         sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+         scene.add(sphere);
+         let disc1Geometry = new THREE.TorusGeometry(3, 1, 2, 40);
+         let disc2Geometry = new THREE.TorusGeometry(4, 1, 2, 40);
+         let disc3Geometry = new THREE.TorusGeometry(5, 1, 2, 40);
+         let discMaterial1 = new THREE.BasicMeshMaterial({
+           color: 'yellow'
+         });
+         let discMaterial2 = new THREE.BasicMeshMaterial({
+           color: 'red'
+         });
+         let discMaterial3 = new THREE.BasicMeshMaterial({
+           color: 'yellow'
+         });
+
+         disc1 = new THREE.Mesh(disc1Geometry, discMaterial1);
+         disc2 = new THREE.Mesh(disc2Geometry, discMaterial2);
+         disc3 = new THREE.Mesh(disc3Geometry, discMaterial3);
+         scene.add(disc1);
+         scene.add(disc2);
+         scene.add(disc3);
+      }
+
+      let init = function() {
+        // create scene
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x000000);
+
+        // set up camera
+        camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 1000);
+  
+  
+        // create the renderer
+        renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+      }
+
+
+      let mainLoop = function() {
+
+        renderer.render(scene, camera);
+        requestAnimationFrame(mainLoop);
+      }
+
+		</script>
+	</body>
+</html>
