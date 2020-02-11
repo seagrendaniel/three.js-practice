@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <script src="three.min.js"></script>
+  <title>Text Geometry Practice</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+      let scene, camera, renderer, cube, normals, sphere, torus;
+      let ADD = 0.02;
+
+      let createGeometry = function() {
+        let geometry = new THREE.BoxGeometry(5, 5, 5);
+        let material = new THREE.MeshBasicMaterial({color: 0xbbbbbb, wireframe: true});
+
+        cube = new THREE.Geometry(geometry, material);
+        torus = new THREE.Geometry(geometry, material);
+
+        scene.add(cube);
+      }
+
+      let init = function () {
+    // create scene
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x000000);
+
+    // set up camera
+    camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 1000);
+    camera.position.z = 50;
+
+    createGeometry();
+
+
+    // create the renderer
+    renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+  }
+</script>
