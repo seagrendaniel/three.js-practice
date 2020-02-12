@@ -31,6 +31,8 @@
         let material = new THREE.MeshNormalMaterial();
         let depthMaterial = new THREE.MeshDepthMaterial();
 
+        let lineMaterial = new THREE.LineBasicMaterial({color: 0xffffff, linewidth: 1});
+
         cube = new THREE.Mesh(geometry, depthMaterial);
         cube.position.z = -10;
         cube.position.x = -5;
@@ -40,8 +42,14 @@
         sphere.position.z = 0;
         sphere.position.x = 5;
 
-        scene.add(cube);
-        scene.add(sphere);
+        let cylGeometry = new THREE.CylinderGeometry(3, 2, 4);
+        let cylinder = new THREE.Line(cylGeometry, lineMaterial);
+        cylinder.position.z = -10;
+        cylinder.position.x = -5;
+
+        scene.add(cylinder);
+        // scene.add(cube);
+        // scene.add(sphere);
         // torus = new THREE.Mesh(geometry, material);
 
         // normals = new THREE.FaceNormalsHelper(cube, 5);
@@ -50,7 +58,7 @@
       let init = function () {
     // create scene
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xffffff);
+    scene.background = new THREE.Color(0x000000);
 
     // set up camera
     camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 1000);
