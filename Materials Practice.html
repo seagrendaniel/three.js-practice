@@ -35,8 +35,8 @@
         cube.position.z = -10;
         cube.position.x = -5;
 
-        let geometry = new THREE.SphereGeometry(3, 30, 30)
-        sphere = new THREE.Mesh(geometry, depthMaterial);
+        let sphereGeometry = new THREE.SphereGeometry(3, 30, 30)
+        sphere = new THREE.Mesh(sphereGeometry, depthMaterial);
         sphere.position.z = 0;
         sphere.position.x = 5;
 
@@ -45,15 +45,12 @@
         // torus = new THREE.Mesh(geometry, material);
 
         // normals = new THREE.FaceNormalsHelper(cube, 5);
-
-        scene.add(cube);
-        scene.add(normals);
       }
 
       let init = function () {
     // create scene
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000000);
+    scene.background = new THREE.Color(0xffffff);
 
     // set up camera
     camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 1000);
