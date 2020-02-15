@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <script src="three.min.js"></script>
-  <title>Materials Practice</title>
+  <title>Name in 3D</title>
   <style>
     body {
       margin: 0;
@@ -26,33 +26,39 @@
       let scene, camera, renderer, cube, normals, sphere, torus;
       let ADD = 0.02;
 
-      let createGeometry = function() {
-        let geometry = new THREE.BoxGeometry(3, 2, 4);
-        let material = new THREE.MeshNormalMaterial();
-        let depthMaterial = new THREE.MeshDepthMaterial();
+      // let createGeometry = function() {
+      //   let geometry = new THREE.BoxGeometry(3, 2, 4);
+      //   let material = new THREE.MeshNormalMaterial();
+      //   let depthMaterial = new THREE.MeshDepthMaterial();
 
-        let lineMaterial = new THREE.LineBasicMaterial({color: 0x, linewidth: 1});
+      //   let lineMaterial = new THREE.LineBasicMaterial({color: 0x, linewidth: 1});
 
-        cube = new THREE.Mesh(geometry, depthMaterial);
-        cube.position.z = -10;
-        cube.position.x = -5;
+      //   cube = new THREE.Mesh(geometry, depthMaterial);
+      //   cube.position.z = -10;
+      //   cube.position.x = -5;
 
-        let sphereGeometry = new THREE.SphereGeometry(3, 30, 30)
-        sphere = new THREE.Mesh(sphereGeometry, depthMaterial);
-        sphere.position.z = 0;
-        sphere.position.x = 5;
+      //   let sphereGeometry = new THREE.SphereGeometry(3, 30, 30)
+      //   sphere = new THREE.Mesh(sphereGeometry, depthMaterial);
+      //   sphere.position.z = 0;
+      //   sphere.position.x = 5;
 
-        let cylGeometry = new THREE.CylinderGeometry(3, 2, 4);
-        let cylinder = new THREE.Line(cylGeometry, lineMaterial);
-        cylinder.position.z = -10;
-        cylinder.position.x = -5;
+      //   let cylGeometry = new THREE.CylinderGeometry(3, 2, 4);
+      //   let cylinder = new THREE.Line(cylGeometry, lineMaterial);
+      //   cylinder.position.z = -10;
+      //   cylinder.position.x = -5;
 
-        scene.add(cylinder);
+      //   scene.add(cylinder);
         // scene.add(cube);
         // scene.add(sphere);
         // torus = new THREE.Mesh(geometry, material);
 
         // normals = new THREE.FaceNormalsHelper(cube, 5);
+      // }
+
+      let myNameIn3D = function() {
+        let loader = new THREE.FontLoader();
+        let font = loader.parse(fontJSON);
+        let text = new THREE.TextGeometry();
       }
 
       let init = function () {
