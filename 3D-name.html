@@ -30,7 +30,9 @@
       let myNameIn3D = function() {
         let loader = new THREE.FontLoader();
         let font = loader.parse(fontJSON);
-        let text = new THREE.TextGeometry();
+        let text = new THREE.TextGeometry({font: font, size: 5, height: 1});
+
+      scene.add(myNameIn3D);
       }
 
       let init = function () {
